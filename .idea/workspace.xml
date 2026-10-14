@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="36083fe1-725e-418d-9ca5-c6f78557d0fb" name="更改" comment="学习s03_permission，添加中文注释">
+    <list default="true" id="36083fe1-725e-418d-9ca5-c6f78557d0fb" name="更改" comment="学习s04_hooks，添加中文注释">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s04_hooks/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/s04_hooks/code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s05_todo_write/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/s05_todo_write/code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s05_todo_write/example/hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/s05_todo_write/example/hello.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +35,7 @@
     "Python.code (1).executor": "Run",
     "Python.code (2).executor": "Run",
     "Python.code (3).executor": "Run",
+    "Python.code (4).executor": "Run",
     "Python.code.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -55,7 +57,7 @@
       <recent name="F:\workspace\ai\learn-claude-code" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.code (3)">
+  <component name="RunManager" selected="Python.code (4)">
     <configuration name="code (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="learn-claude-code" />
       <option name="ENV_FILES" value="" />
@@ -131,6 +133,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="code (4)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="learn-claude-code" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/s05_todo_write" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/s05_todo_write/code.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="code" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="learn-claude-code" />
       <option name="ENV_FILES" value="" />
@@ -158,6 +185,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.code (4)" />
         <item itemvalue="Python.code (3)" />
         <item itemvalue="Python.code (2)" />
         <item itemvalue="Python.code (1)" />
@@ -187,7 +215,7 @@
       <workItem from="1791945107407" duration="797000" />
       <workItem from="1791945919676" duration="486000" />
       <workItem from="1791946420859" duration="937000" />
-      <workItem from="1791947377075" duration="6645000" />
+      <workItem from="1791947377075" duration="9390000" />
     </task>
     <task id="LOCAL-00001" summary="学习s01_agent_loop">
       <option name="closed" value="true" />
@@ -229,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791961011892</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="学习s04_hooks，添加中文注释">
+      <option name="closed" value="true" />
+      <created>1791963019287</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1791963019287</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,9 +293,11 @@
     <MESSAGE value="学习s01_agent_loop，添加中文注释" />
     <MESSAGE value="学习s02_tool_use，添加中文注释" />
     <MESSAGE value="学习s03_permission，添加中文注释" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习s03_permission，添加中文注释" />
+    <MESSAGE value="学习s04_hooks，添加中文注释" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习s04_hooks，添加中文注释" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/learn_claude_code$code__4_.coverage" NAME="code (4) 覆盖结果" MODIFIED="1791965410674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s05_todo_write" />
     <SUITE FILE_PATH="coverage/learn_claude_code$code__1_.coverage" NAME="code (1) 覆盖结果" MODIFIED="1791958765921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s02_tool_use" />
     <SUITE FILE_PATH="coverage/learn_claude_code$code.coverage" NAME="code 覆盖结果" MODIFIED="1791887965246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s01_agent_loop" />
     <SUITE FILE_PATH="coverage/learn_claude_code$code__2_.coverage" NAME="code (2) 覆盖结果" MODIFIED="1791960726552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s03_permission" />
