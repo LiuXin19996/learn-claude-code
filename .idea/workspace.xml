@@ -215,7 +215,7 @@
       <workItem from="1791945919676" duration="486000" />
       <workItem from="1791946420859" duration="937000" />
       <workItem from="1791947377075" duration="16185000" />
-      <workItem from="1792032138278" duration="9263000" />
+      <workItem from="1792032138278" duration="9924000" />
     </task>
     <task id="LOCAL-00001" summary="学习s01_agent_loop">
       <option name="closed" value="true" />
@@ -329,7 +329,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792048452155</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="学习s09_memory">
+      <option name="closed" value="true" />
+      <created>1792051079165</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1792051079165</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +375,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/learn_claude_code$code__4_.coverage" NAME="code (4) 覆盖结果" MODIFIED="1791965410674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s05_todo_write" />
-    <SUITE FILE_PATH="coverage/learn_claude_code$code__1_.coverage" NAME="code (1) 覆盖结果" MODIFIED="1791958765921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s02_tool_use" />
+    <SUITE FILE_PATH="coverage/learn_claude_code$code__1_.coverage" NAME="code (1) 覆盖结果" MODIFIED="1792050861644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s09_memory" />
     <SUITE FILE_PATH="coverage/learn_claude_code$code__5_.coverage" NAME="code (5) 覆盖结果" MODIFIED="1791967672238" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s06_subagent" />
     <SUITE FILE_PATH="coverage/learn_claude_code$code__2_.coverage" NAME="code (2) 覆盖结果" MODIFIED="1791960726552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s03_permission" />
     <SUITE FILE_PATH="coverage/learn_claude_code$code.coverage" NAME="code 覆盖结果" MODIFIED="1791970641274" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s07_skill_loading" />
