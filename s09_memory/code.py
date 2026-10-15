@@ -38,7 +38,7 @@ except ImportError:
 # override=True：即使系统里已有同名环境变量，也用 .env 里的值覆盖。
 load_dotenv(override=True)
 if os.getenv("ANTHROPIC_BASE_URL"):
-    # 配了自定义端点（走代理）时，移除可能打架的 ANTHROPIC_AUTH_TOKEN，
+    # 配了自定义端点（走代理）时，移除可能打架的 ANTHROPIC_AUTH_TOKEN
     # 避免两种鉴权方式冲突。
     os.environ.pop("ANTHROPIC_AUTH_TOKEN", None)
 
