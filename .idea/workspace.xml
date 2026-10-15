@@ -56,8 +56,8 @@
       <recent name="F:\workspace\ai\learn-claude-code" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.code">
-    <configuration name="code (2)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.code (1)">
+    <configuration name="code (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="learn-claude-code" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -66,14 +66,14 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/s03_permission" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/s09_memory" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/s03_permission/code.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/s09_memory/code.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -184,11 +184,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.code (1)" />
         <item itemvalue="Python.code" />
         <item itemvalue="Python.code (5)" />
         <item itemvalue="Python.code (4)" />
         <item itemvalue="Python.code (3)" />
-        <item itemvalue="Python.code (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -215,7 +215,7 @@
       <workItem from="1791945919676" duration="486000" />
       <workItem from="1791946420859" duration="937000" />
       <workItem from="1791947377075" duration="16185000" />
-      <workItem from="1792032138278" duration="6725000" />
+      <workItem from="1792032138278" duration="9263000" />
     </task>
     <task id="LOCAL-00001" summary="学习s01_agent_loop">
       <option name="closed" value="true" />
@@ -321,7 +321,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792047966946</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="学习s09_memory">
+      <option name="closed" value="true" />
+      <created>1792048452155</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1792048452155</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
