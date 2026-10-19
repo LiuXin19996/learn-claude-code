@@ -1919,7 +1919,7 @@ def check_permission(block, prompt_user: bool = True) -> str | None:
             if not prompt_user:
                 return "Permission required: ask Lead to run this command."
             print(f"\n[permission] {block.name}({block.input})")
-            if input("Allow? [y/N] ").strip().lower() not in {"y", "yes"}:
+            if cli_input("Allow? [y/N] ").strip().lower() not in {"y", "yes"}:
                 return "Permission denied by user"
 
     if block.name in {"read_file", "write_file", "edit_file"}:
@@ -1929,7 +1929,7 @@ def check_permission(block, prompt_user: bool = True) -> str | None:
             if not prompt_user:
                 return "Permission required: path is outside the workspace."
             print(f"\n[permission] {block.name}({block.input})")
-            if input("Allow? [y/N] ").strip().lower() not in {"y", "yes"}:
+            if cli_input("Allow? [y/N] ").strip().lower() not in {"y", "yes"}:
                 return "Permission denied by user"
     return None
 
@@ -2073,6 +2073,18 @@ def _start_stdin_reader():
         _stdin_queue.put(None)  # EOF（Ctrl+Z 回车 / 管道结束）
 
     threading.Thread(target=reader, daemon=True).start()
+
+
+def cli_input(prompt: str = "") -> str:
+    """Read one line from the user through the same stdin path as the CLI loop."""
+    # Windows 上 stdin 已被后台读取线程接管，不能再用 input()（两边抢同一行会卡死）。
+    if os.name != "nt":
+        return input(prompt)
+    if prompt:
+        print(prompt, end="", flush=True)
+    _start_stdin_reader()
+    line = _stdin_queue.get()
+    return "" if line is None else line.rstrip("\n")
 
 
 def wait_for_cli_event() -> tuple[str, str | None]:
