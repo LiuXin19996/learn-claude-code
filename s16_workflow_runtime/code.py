@@ -19,10 +19,7 @@ Run:
 """
 
 import asyncio
-try:
-    import fcntl        # borrow file locks from the host: one process per run
-except ImportError:     # Windows has no fcntl module.
-    fcntl = None
+import fcntl
 import hashlib
 import importlib.util
 import json
@@ -108,21 +105,17 @@ def workflow_run_lock(run_id: str):
     try:
         STORE.mkdir(parents=True, exist_ok=True)
         handle = (STORE / f"{run_id}.lock").open("a+", encoding="utf-8")
-        # fcntl.flock gives cross-process locking on POSIX. Windows has no
-        # fcntl, so it falls back to the in-process threading lock only.
-        if fcntl is not None:
-            try:
-                fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-            except BlockingIOError as exc:
-                raise WorkflowInputError(
-                    f"workflow run {run_id} is already active"
-                ) from exc
+        try:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise WorkflowInputError(
+                f"workflow run {run_id} is already active"
+            ) from exc
         yield
     finally:
         if handle is not None:
             try:
-                if fcntl is not None:
-                    fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
             finally:
                 handle.close()
         local_lock.release()

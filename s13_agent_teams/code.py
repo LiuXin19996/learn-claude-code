@@ -38,9 +38,10 @@ Need: pip install anthropic python-dotenv + .env with ANTHROPIC_API_KEY
     更详细的英文说明、图示和用法见同目录 README.md / README.zh.md。）
 """
 
+import fcntl         # 文件锁（flock）：让「同一台机器上的多个进程」也能互斥操作任务板
+                     # 注意：fcntl 是 POSIX 专有模块，Windows 上没有，本课脚本只能在类 Unix 下运行
 import json          # 任务文件与信箱消息的序列化
 import os            # 环境变量、进程号、原子替换文件
-import queue         # Windows 上没有 select-on-stdin，用队列接收后台线程读到的输入
 import random        # 生成协议请求号 req_000123
 import re            # 正则：任务 ID / 目录名 / 队友名 / 危险命令匹配
 import secrets       # 生成随机任务 ID（task_xxxxxxxx）
@@ -59,8 +60,6 @@ try:
 except ImportError:
     # Windows 自带 Python 没有 readline，跳过即可。
     pass
-
-import portalocker   # 跨平台文件锁：POSIX 下用 fcntl.flock，Windows 下用 msvcrt.locking
 
 from anthropic import Anthropic  # Anthropic 官方 Python SDK 客户端
 from dotenv import load_dotenv   # 从 .env 文件加载环境变量
@@ -104,8 +103,7 @@ def task_store_lock():
     # 序列化任务变更：既要防同一进程内的多线程打架，也要防同机多进程打架。
     # 双层锁：
     #   * task_lock（RLock）——只管本进程内的线程；
-    #   * portalocker.lock(LOCK_EX) 锁 .lock 文件——管跨进程（比如你同时开了两个 s13）。
-    #     portalocker 在 POSIX 下用 fcntl.flock、Windows 下用 msvcrt.locking，两边都能用。
+    #   * fcntl.flock(LOCK_EX) 锁 .lock 文件——管跨进程（比如你同时开了两个 s13）。
     # depth 计数让它可重入：嵌套调用时只在最外层真正加/解文件锁。
     with task_lock:
         depth = getattr(_task_store_state, "depth", 0)
@@ -113,7 +111,7 @@ def task_store_lock():
             # 只有最外层才去拿文件锁；句柄存在 thread-local 里，等最外层退出时释放。
             TASKS_DIR.mkdir(parents=True, exist_ok=True)
             handle = TASK_LOCK_PATH.open("a+", encoding="utf-8")
-            portalocker.lock(handle, portalocker.LOCK_EX)  # 独占锁：拿不到就阻塞等待
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)  # 独占锁：拿不到就阻塞等待
             _task_store_state.handle = handle
         _task_store_state.depth = depth + 1
         try:
@@ -123,7 +121,7 @@ def task_store_lock():
             _task_store_state.depth -= 1
             if _task_store_state.depth == 0:
                 handle = _task_store_state.handle
-                portalocker.unlock(handle)
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
                 handle.close()
                 del _task_store_state.handle
 
@@ -1915,7 +1913,7 @@ def check_permission(block, prompt_user: bool = True) -> str | None:
             if not prompt_user:
                 return "Permission required: ask Lead to run this command."
             print(f"\n[permission] {block.name}({block.input})")
-            if cli_input("Allow? [y/N] ").strip().lower() not in {"y", "yes"}:
+            if input("Allow? [y/N] ").strip().lower() not in {"y", "yes"}:
                 return "Permission denied by user"
 
     if block.name in {"read_file", "write_file", "edit_file"}:
@@ -1925,7 +1923,7 @@ def check_permission(block, prompt_user: bool = True) -> str | None:
             if not prompt_user:
                 return "Permission required: path is outside the workspace."
             print(f"\n[permission] {block.name}({block.input})")
-            if cli_input("Allow? [y/N] ").strip().lower() not in {"y", "yes"}:
+            if input("Allow? [y/N] ").strip().lower() not in {"y", "yes"}:
                 return "Permission denied by user"
     return None
 
@@ -2049,40 +2047,6 @@ def print_last_assistant_message(history: list):
             print(block.get("text", ""))
 
 
-_stdin_queue: "queue.Queue[str | None] | None" = None
-
-
-def _start_stdin_reader():
-    """Windows 上 select 只能等 socket，等不了终端输入。
-
-    所以退化为：一条后台线程阻塞读 stdin，读到一行就放进队列，
-    主循环用 queue.get(timeout=...) 拿到同样的「带超时等待」效果。
-    """
-    global _stdin_queue
-    if _stdin_queue is not None:
-        return
-    _stdin_queue = queue.Queue()
-
-    def reader():
-        for line in sys.stdin:
-            _stdin_queue.put(line)
-        _stdin_queue.put(None)  # EOF（Ctrl+Z 回车 / 管道结束）
-
-    threading.Thread(target=reader, daemon=True).start()
-
-
-def cli_input(prompt: str = "") -> str:
-    """Read one line from the user through the same stdin path as the CLI loop."""
-    # Windows 上 stdin 已被后台读取线程接管，不能再用 input()（两边抢同一行会卡死）。
-    if os.name != "nt":
-        return input(prompt)
-    if prompt:
-        print(prompt, end="", flush=True)
-    _start_stdin_reader()
-    line = _stdin_queue.get()
-    return "" if line is None else line.rstrip("\n")
-
-
 def wait_for_cli_event() -> tuple[str, str | None]:
     # CLI 事件循环的核心：同时盯着「键盘输入」和「Lead 的信箱」，谁先来就处理谁。
     # 有了它，队友发来的事件能像用户输入一样把 Lead 唤醒。
@@ -2096,16 +2060,6 @@ def wait_for_cli_event() -> tuple[str, str | None]:
         if not prompt_visible:
             print("s13 >> ", end="", flush=True)  # 手写提示符（因为要交替监听）
             prompt_visible = True
-        if os.name == "nt":
-            # Windows 分支：select.select 不支持非 socket，改用后台线程 + 队列。
-            _start_stdin_reader()
-            try:
-                line = _stdin_queue.get(timeout=0.25)
-            except queue.Empty:
-                continue
-            if line is None:
-                return "quit", None  # EOF
-            return "user", line.rstrip("\n")
         # select 带 0.25 秒超时：既能及时响应输入，又能定期回头检查信箱。
         readable, _, _ = select.select([sys.stdin], [], [], 0.25)
         if readable:
