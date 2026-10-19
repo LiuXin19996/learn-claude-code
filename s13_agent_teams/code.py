@@ -38,10 +38,6 @@ Need: pip install anthropic python-dotenv + .env with ANTHROPIC_API_KEY
     更详细的英文说明、图示和用法见同目录 README.md / README.zh.md。）
 """
 
-try:
-    import fcntl     # 文件锁（flock）：让「同一台机器上的多个进程」也能互斥操作任务板
-except ImportError:
-    fcntl = None     # Windows 没有 fcntl：退化成只用进程内的线程锁（与 s15 一致）
 import json          # 任务文件与信箱消息的序列化
 import os            # 环境变量、进程号、原子替换文件
 import queue         # Windows 上没有 select-on-stdin，用队列接收后台线程读到的输入
@@ -63,6 +59,8 @@ try:
 except ImportError:
     # Windows 自带 Python 没有 readline，跳过即可。
     pass
+
+import portalocker   # 跨平台文件锁：POSIX 下用 fcntl.flock，Windows 下用 msvcrt.locking
 
 from anthropic import Anthropic  # Anthropic 官方 Python SDK 客户端
 from dotenv import load_dotenv   # 从 .env 文件加载环境变量
@@ -106,8 +104,8 @@ def task_store_lock():
     # 序列化任务变更：既要防同一进程内的多线程打架，也要防同机多进程打架。
     # 双层锁：
     #   * task_lock（RLock）——只管本进程内的线程；
-    #   * fcntl.flock(LOCK_EX) 锁 .lock 文件——管跨进程（比如你同时开了两个 s13）。
-    #     Windows 没有 fcntl，此时只剩进程内锁（单开本脚本没问题，多开不再互斥）。
+    #   * portalocker.lock(LOCK_EX) 锁 .lock 文件——管跨进程（比如你同时开了两个 s13）。
+    #     portalocker 在 POSIX 下用 fcntl.flock、Windows 下用 msvcrt.locking，两边都能用。
     # depth 计数让它可重入：嵌套调用时只在最外层真正加/解文件锁。
     with task_lock:
         depth = getattr(_task_store_state, "depth", 0)
@@ -115,8 +113,7 @@ def task_store_lock():
             # 只有最外层才去拿文件锁；句柄存在 thread-local 里，等最外层退出时释放。
             TASKS_DIR.mkdir(parents=True, exist_ok=True)
             handle = TASK_LOCK_PATH.open("a+", encoding="utf-8")
-            if fcntl is not None:
-                fcntl.flock(handle.fileno(), fcntl.LOCK_EX)  # 独占锁：拿不到就阻塞等待
+            portalocker.lock(handle, portalocker.LOCK_EX)  # 独占锁：拿不到就阻塞等待
             _task_store_state.handle = handle
         _task_store_state.depth = depth + 1
         try:
@@ -126,8 +123,7 @@ def task_store_lock():
             _task_store_state.depth -= 1
             if _task_store_state.depth == 0:
                 handle = _task_store_state.handle
-                if fcntl is not None:
-                    fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
+                portalocker.unlock(handle)
                 handle.close()
                 del _task_store_state.handle
 
