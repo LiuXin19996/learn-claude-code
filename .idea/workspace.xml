@@ -1,9 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="36083fe1-725e-418d-9ca5-c6f78557d0fb" name="更改" comment="撤销更改">
+    <list default="true" id="36083fe1-725e-418d-9ca5-c6f78557d0fb" name="更改" comment="为s15_integrated_harness添加详细的中文注释">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s15_integrated_harness/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/s15_integrated_harness/code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s01-the-agent-loop.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s02-tool-use.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s03-todo-write.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s04-subagent.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s05-skill-loading.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s06-context-compact.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s07-task-system.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s08-background-tasks.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s09-agent-teams.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s10-team-protocols.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s11-autonomous-agents.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/en/s12-worktree-task-isolation.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s01-the-agent-loop.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s02-tool-use.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s03-todo-write.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s04-subagent.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s05-skill-loading.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s06-context-compact.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s07-task-system.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s08-background-tasks.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s09-agent-teams.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s10-team-protocols.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s11-autonomous-agents.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ja/s12-worktree-task-isolation.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s01-the-agent-loop.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s02-tool-use.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s03-todo-write.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s04-subagent.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s05-skill-loading.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s06-context-compact.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s07-task-system.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s08-background-tasks.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s09-agent-teams.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s10-team-protocols.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s11-autonomous-agents.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/zh/s12-worktree-task-isolation.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/s16_workflow_runtime/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/s16_workflow_runtime/code.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s17_goal_loop/code.py" beforeDir="false" afterPath="$PROJECT_DIR$/s17_goal_loop/code.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +256,8 @@
       <workItem from="1792032138278" duration="16436000" />
       <workItem from="1792128286222" duration="9961000" />
       <workItem from="1792376765050" duration="15343000" />
-      <workItem from="1792645754577" duration="4580000" />
+      <workItem from="1792645754577" duration="5954000" />
+      <workItem from="1792735921372" duration="4887000" />
     </task>
     <task id="LOCAL-00001" summary="学习s01_agent_loop">
       <option name="closed" value="true" />
@@ -413,7 +451,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792398674061</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="为s15_integrated_harness添加详细的中文注释">
+      <option name="closed" value="true" />
+      <created>1792662414519</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1792662414520</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -453,7 +499,8 @@
     <MESSAGE value="学习s13_agent_teams" />
     <MESSAGE value="修复fcntl报错问题" />
     <MESSAGE value="撤销更改" />
-    <option name="LAST_COMMIT_MESSAGE" value="撤销更改" />
+    <MESSAGE value="为s15_integrated_harness添加详细的中文注释" />
+    <option name="LAST_COMMIT_MESSAGE" value="为s15_integrated_harness添加详细的中文注释" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/learn_claude_code$code__4_.coverage" NAME="code (4) 覆盖结果" MODIFIED="1792141907986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/s12_cron_scheduler" />
