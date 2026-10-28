@@ -3093,9 +3093,9 @@ def _registered_worktree(name: str) -> tuple[Path | None, str | None]:
     return path, None
 ```
 
-无绑定返回 WORKDIR；有绑定却损坏时带回 error，调用者 fail closed。_registered_worktree 校验目标路径、Git 注册、目录实际存在、分支恰为 refs/heads/wt/<name>，不能拿一个随手建的同名普通目录冒充任务工作树。
+无绑定返回 WORKDIR；有绑定却损坏时带回 error，调用者 fail closed。_registered_worktree 校验目标路径、Git 注册、目录实际存在、分支恰为 `refs/heads/wt/<name>`，不能拿一个随手建的同名普通目录冒充任务工作树。
 
-来源：`s15_integrated_harness/code.py:514`，_worktree_path、_worktree_branch 与 _run_git。
+来源：`s15_integrated_harness/code.py:514`，`_worktree_path`、`_worktree_branch` 与 `_run_git`。
 
 ```python
 def _worktree_path(name: str) -> Path:
@@ -3154,7 +3154,7 @@ def _registered_worktrees() -> tuple[dict[Path, dict[str, str]], str | None]:
 
 注册表读取走未截断 _run_git，不使用给模型展示时限长的 run_git。porcelain 每个空行结束一条，以 resolve 后路径为 key；使用 argv 列表避免 shell 插值，30 秒超时，失败转 (False,文本)。每次有绑定的基础工具都可能扫描任务并启动 Git 校验，不是单纯的 O(1) 内存 cwd 查表。收益是及时发现路径/分支漂移；代价是重复文件和子进程开销。[证据：tests/test_agent_teams_runtime.py:1783，未截断注册表解析的源码断言。]
 
-返回顺序是 _registered_worktree → task_worktree_cwd → assignment_cwd → _agent_cwd → 具体 run_*。接下来才真正读写或启动 shell。
+返回顺序是 `_registered_worktree → task_worktree_cwd → assignment_cwd → _agent_cwd → 具体 run_*`。接下来才真正读写或启动 shell。
 
 ## 12.4 文件路径约束：限制直接文件工具，不限制 shell 的能力
 
@@ -3170,7 +3170,7 @@ def safe_path(path: str, cwd: Path | None = None) -> Path:
     return resolved
 ```
 
-base 为实际 cwd 的 resolve，path 与之拼接后再次 resolve，必须在 base 内。绝对路径只有位于 base 下才通过；..、已存在的越界 symlink 可在此被拒绝。PreHook 的 WORKDIR 检查与底层 assignment base 检查叠加，后者通常更窄。
+base 为实际 cwd 的 resolve，path 与之拼接后再次 resolve，必须在 base 内。绝对路径只有位于 base 下才通过；已存在的越界 symlink 可在此被拒绝。PreHook 的 WORKDIR 检查与底层 assignment base 检查叠加，后者通常更窄。
 
 这不是操作系统沙箱：shell 可以 cd、用绝对路径和网络；worktree 中可见 Git 公共目录；检查到实际打开之间也没有文件描述符级防链接替换机制。相同进程权限下的恶意并发文件系统变化不在保证内。正常可信本地环境里，这个轻量校验能防模型误传路径；其性能成本是路径解析，不应宣传成租户隔离。
 
@@ -3549,7 +3549,7 @@ def _task_path(task_id: str) -> Path:
 
 字段含义：id 是运行时身份；subject/description 描述工作；status 是 pending/in_progress/completed；owner 是执行者逻辑名；blockedBy 是前置任务 ID 列表；worktree 是可选的检出目录名，不是任意路径。
 
-_task_path 限制 task_[0-9a-f]{8}，并检查预解析 TASKS_ROOT 仍位于 WORKDIR、最终文件位于该根下，防 task_id 路径穿越。owner 不是认证主体，文件系统可写者也能修改任务；这些规则保护宿主正常调度，不构成跨租户授权。
+`_task_path` 限制 `task_[0-9a-f]{8}`，并检查预解析 TASKS_ROOT 仍位于 WORKDIR、最终文件位于该根下，防 task_id 路径穿越。owner 不是认证主体，文件系统可写者也能修改任务；这些规则保护宿主正常调度，不构成跨租户授权。
 
 ## 14.2 create_task：独占分配随机 ID，不提供业务去重
 
@@ -3583,7 +3583,7 @@ def create_task(subject: str, description: str = "") -> Task:
 
 subject.strip 后不能为空；description 没有同等级类型/长度校验。进入 task_store_lock 后最多尝试 100 次，生成 8 位十六进制随机后缀，open("x") 要求文件不存在；碰撞换 ID，不覆盖旧 Task。写入初态 pending、owner=None、blockedBy=[]。
 
-open("x") 解决身份碰撞和覆盖，不解决业务请求重复：相同 subject 重传、模型超时后重试都能新增另一个任务，没有请求 ID/业务唯一键。首次文件创建直接 json.dump，非 save_task 的 replace；异常可留下新建但不完整的文件，也没有清理失败初始记录。正常返回后包装给模型 Created <id>，下一次 update_task 才能引用它。
+open("x") 解决身份碰撞和覆盖，不解决业务请求重复：相同 subject 重传、模型超时后重试都能新增另一个任务，没有请求 ID/业务唯一键。首次文件创建直接 json.dump，非 save_task 的 replace；异常可留下新建但不完整的文件，也没有清理失败初始记录。正常返回后包装给模型 `Created <id>`，下一次 update_task 才能引用它。
 
 ## 14.3 首次写入遇到 task_store_lock：线程锁与跨进程锁不同
 
