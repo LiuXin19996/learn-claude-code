@@ -4154,7 +4154,7 @@ def remove_worktree(name: str, discard_changes: bool = False) -> str:
 
 status --porcelain --ignored 将未跟踪与忽略文件也纳入保护；默认有任何输出拒绝。discard_changes=True 才加 --force，**函数本身不询问用户**。宿主需要承担破坏性调用的授权责任，不能从“模型没暴露”推导出 helper 内已经确认。
 
-Git worktree remove 不删除 wt/<name> 分支，保留已提交工作；若显式 discard，未提交内容仍会丢失。Git 成功后逐个清空 Task.worktree，再发生文件失败会报告部分成功。多个记录和 Git 依旧不是同一事务。当前进程内的 lease/bg 检查也看不到其他进程所有使用者。
+Git worktree remove 不删除 `wt/<name>` 分支，保留已提交工作；若显式 discard，未提交内容仍会丢失。Git 成功后逐个清空 Task.worktree，再发生文件失败会报告部分成功。多个记录和 Git 依旧不是同一事务。当前进程内的 lease/bg 检查也看不到其他进程所有使用者。
 
 [证据：tests/test_agent_teams_runtime.py:300、1946、1965、2000、2024、2061，源码断言包含 host-only、脏/忽略文件、保留分支和活动任务保护；本文未运行。]
 
