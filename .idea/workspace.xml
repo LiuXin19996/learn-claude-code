@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36083fe1-725e-418d-9ca5-c6f78557d0fb" name="更改" comment="为s01、s02添加详细的中文注释">
-      <change afterPath="$PROJECT_DIR$/.md/s01_agent_loop.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.md/s02_tool_use.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.md/s15_integrated_harness.md" beforeDir="false" afterPath="$PROJECT_DIR$/.md/s15_integrated_harness.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +223,8 @@
       <workItem from="1792735921372" duration="9985000" />
       <workItem from="1793068560646" duration="18906000" />
       <workItem from="1793164996748" duration="14837000" />
-      <workItem from="1793259463082" duration="6711000" />
+      <workItem from="1793259463082" duration="6764000" />
+      <workItem from="1793343230593" duration="10968000" />
     </task>
     <task id="LOCAL-00001" summary="学习s01_agent_loop">
       <option name="closed" value="true" />
@@ -441,7 +442,15 @@
       <option name="project" value="LOCAL" />
       <updated>1793270547773</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="为s01、s02添加详细的中文注释">
+      <option name="closed" value="true" />
+      <created>1793270595954</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1793270595954</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -4274,7 +4274,7 @@ SUB_HANDLERS = {
 }
 ```
 
-五个 schema 对应 bash/read/write/edit/glob，handler 是**通用 run_***，不是 run_agent_*。正常省略 cwd 时落在 WORKDIR，不会自动使用当前 Lead 的 worktree。这意味着任务上下文隔离与目录隔离不是同一件事：Lead 即使已认领专属 worktree，调用 task 后子代理仍可能在主工作区读写。
+五个 schema 对应 bash/read/write/edit/glob，handler 是**通用 run_***，不是 `run_agent_`*。正常省略 cwd 时落在 WORKDIR，不会自动使用当前 Lead 的 worktree。这意味着任务上下文隔离与目录隔离不是同一件事：Lead 即使已认领专属 worktree，调用 task 后子代理仍可能在主工作区读写。
 
 底层通用函数签名有 cwd 参数，schema 没声明该参数而本地也无通用 schema 验证；异常/额外输入的可接受范围取决于 Python 绑定和类型。不能将“模型通常只传声明字段”视为强隔离。对文件还有 Pre 的 WORKDIR 检查和 safe_path，shell 则依赖每次确认，不是任意参数都绝对安全。
 
@@ -4615,7 +4615,7 @@ class MessageBus:
             return inbox.exists() and inbox.stat().st_size > 0
 ```
 
-BUS 的 RLock 只串行当前对象内读写。_path 检查代理名和最终路径位于 MAILBOX_ROOT。_read_unlocked 先将全部非空行 JSON 解析，再 unlink 文件，返回普通 dict 列表。这是**读取后删除**，不是业务处理后确认：后续 handle、模型或进程失败没有自动回队。
+BUS 的 RLock 只串行当前对象内读写。`_path` 检查代理名和最终路径位于 MAILBOX_ROOT。`_read_unlocked` 先将全部非空行 JSON 解析，再 unlink 文件，返回普通 dict 列表。这是**读取后删除**，不是业务处理后确认：后续 handle、模型或进程失败没有自动回队。
 
 坏 JSON 导致 unlink 前抛错，坏文件仍在；没有逐条隔离/死信。跨进程没有 flock，共享同目录可能在追加、读取、删除之间发生竞争；Condition 也只唤醒本进程。目录路径限制防收件人穿越，不认证 from 身份，能改 mailbox 文件的同权限主体可伪造数据。
 
